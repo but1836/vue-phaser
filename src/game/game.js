@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import BootScene from './scenes/BootScene'
 import PlayScene from './scenes/PlayScene'
+import EndScene from './scenes/EndScene'
 
 
 function launch(containerId) {
@@ -9,14 +10,7 @@ function launch(containerId) {
     width: 600,
     height: 600,
     parent: containerId,
-    // physics: {
-    //   default: 'arcade',
-    //   arcade: {
-    //     gravity: { y: 300 },
-    //     debug: false
-    //   }
-    // },
-    scene: [BootScene, PlayScene]
+    scene: [BootScene, PlayScene, EndScene]
   })
 }
 

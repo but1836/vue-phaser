@@ -7,11 +7,12 @@ export default class PlayScene extends Scene {
     this.heroSpeed = 2;
     this.collisionDist = 35;
     this.enemySpeed = 2;
+    this.enemyXDirection = 1;
+    this.enemyYDirection = 1;
+    this.finalScore = 0;
   }
 
   create () {
-    console.log("play this", this)
-    console.log("this.game.scene.scenes[0].heroName", this.game.scene.scenes[0].heroName)
     // background
     this.add.image(303, 299, 'labBG')
 
@@ -24,7 +25,7 @@ export default class PlayScene extends Scene {
     this.nugget.setScale(.4)
 
     // enemy
-    this.enemy = this.add.sprite(500, 500, 'enemy')
+    this.enemy = this.add.sprite(Phaser.Math.RND.between(400, 580), Phaser.Math.RND.between(400, 580), 'enemy')
     this.enemy.setScale(.4)
 
     // score
@@ -55,6 +56,7 @@ export default class PlayScene extends Scene {
       this.hero.y += this.heroSpeed;
     }
 
+    // detect nugget collision, increase score, move nugget
     if(this.hero.x - this.nugget.x <= this.collisionDist 
       && this.hero.x - this.nugget.x >= -this.collisionDist
       && this.hero.y - this.nugget.y <= this.collisionDist
@@ -65,6 +67,59 @@ export default class PlayScene extends Scene {
       this.score += 10
       this.scoreText.setText("score: " + this.score)
     }
+
+    // detect enemy collision, end game.
+    if(this.hero.x - this.enemy.x <= this.collisionDist 
+      && this.hero.x - this.enemy.x >= -this.collisionDist
+      && this.hero.y - this.enemy.y <= this.collisionDist
+      && this.hero.y - this.enemy.y >= -this.collisionDist)
+    { 
+      this.finalScore = this.score
+      this.score = 0
+      this.enemySpeed = 2
+      this.scene.start('EndScene')
+    }
+
+    this.moveEnemy()
+
+    // detect enemy collision with nugget.
+    if(this.nugget.x - this.enemy.x <= this.collisionDist 
+      && this.nugget.x - this.enemy.x >= -this.collisionDist
+      && this.nugget.y - this.enemy.y <= this.collisionDist
+      && this.nugget.y - this.enemy.y >= -this.collisionDist)
+    { 
+      this.enemySpeed += .1
+      console.log("enemy speed", this.enemySpeed)
+    }
+    
   }
 
+  moveEnemy() {
+    this.enemy.x += this.enemyXDirection * this.enemySpeed
+    this.enemy.y += this.enemyYDirection * this.enemySpeed
+
+    if (this.enemy.x <= 8)
+    {
+      console.log(Phaser.Math.RND.between(1, 99))
+      this.enemyXDirection = 1;
+      this.enemyYDirection = this.enemyYDirection * Phaser.Math.RND.between(50, 120)/100
+    }
+    if (this.enemy.x >= 595 )
+    {
+      this.enemyXDirection = -1;
+      this.enemyYDirection = this.enemyYDirection * Phaser.Math.RND.between(50, 120)/100
+    }
+
+    if (this.enemy.y <= 8 )
+    {
+      this.enemyYDirection = 1;
+      this.enemyXDirection = this.enemyXDirection * Phaser.Math.RND.between(50, 120)/100
+    }
+    if (this.enemy.y >= 595 )
+    {
+      this.enemyYDirection = -1;
+      this.enemyXDirection = this.enemyXDirection * Phaser.Math.RND.between(50, 120)/100
+    }
+
+  }
 }

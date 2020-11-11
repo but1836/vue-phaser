@@ -1,7 +1,7 @@
 import { Scene } from 'phaser'
 
 import labBG from '@/game/assets/CCLabsBackground.png'
-import titleBG from '@/game/assets/CCL.jpg'
+import bootBG from '@/game/assets/CCL.jpg'
 import tommy from '@/game/assets/Tommy.png'
 import david from '@/game/assets/David.png'
 import manske from '@/game/assets/Manske.png'
@@ -18,7 +18,9 @@ export default class BootScene extends Scene {
 
   preload () {
     this.load.image('labBG', labBG)
-    this.load.image('titleBG', titleBG)
+    this.load.image('bootBG', bootBG)    
+    // this.load.image('title', title)    
+
     this.load.image('tommy', tommy)
     this.load.image('david', david)
     this.load.image('manske', manske)
@@ -28,13 +30,17 @@ export default class BootScene extends Scene {
   }
 
   create () {
-    console.log("boot this", this)
     // Background
-    this.add.image(303, 299, 'titleBG')
+    this.add.image(303, 299, 'bootBG')
     this.add.rectangle(303, 299, 400, 400, 0xffffff, .9)
 
+    // Game Title
+    // this.add.image(303, 50, 'title')
+    this.title = this.add.text(90, 20, 'BRAVO HUNTER', {fontSize: '60px', fill: '#FFF'})
+
+
     // Instruction text
-    this.instructions = this.add.text(150, 50, 'Select your player, then press ENTER', {fontSize: '16px', fill: '#FFF'})
+    this.instructions = this.add.text(120, 550, 'Select your player, then press ENTER', {fontSize: '16px', fill: '#FFF'})
 
     // player choice sprites
     this.tommy = this.add.sprite(200, 200, 'tommy').setInteractive()
