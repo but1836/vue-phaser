@@ -43,22 +43,25 @@ export default class PlayScene extends Scene {
   }
 
   update () {
-    if (this.leftKey.isDown)
-    {
-      this.hero.x -= this.heroSpeed;
-    }
-    if (this.rightKey.isDown)
-    {
-      this.hero.x += this.heroSpeed;
-    }
-    if (this.upKey.isDown)
-    {
-      this.hero.y -= this.heroSpeed;
-    }
-    if (this.downKey.isDown)
-    {
-      this.hero.y += this.heroSpeed;
-    }
+
+    // hero movement
+      if(this.hero.x >= 0 && this.leftKey.isDown)
+      {
+        this.hero.x -= this.heroSpeed;
+      }
+      if(this.hero.x <= 600 && this.rightKey.isDown)
+      {
+        this.hero.x += this.heroSpeed;
+      }
+      if(this.hero.y >= 0 && this.upKey.isDown)
+      {
+        this.hero.y -= this.heroSpeed;
+      }
+      if(this.hero.y <= 600 && this.downKey.isDown)
+      {
+        this.hero.y += this.heroSpeed;
+      }
+
 
     // detect nugget collision, increase score, move nugget
     if(this.hero.x - this.nugget.x <= this.collisionDist 
