@@ -25,7 +25,11 @@ export default class PlayScene extends Scene {
     this.nugget.setScale(.4)
 
     // enemy
-    this.enemy = this.add.sprite(Phaser.Math.RND.between(400, 580), Phaser.Math.RND.between(400, 580), 'enemy')
+    this.enemy = this.add.sprite(
+      Phaser.Math.RND.between(400, 580), 
+      Phaser.Math.RND.between(400, 580), 
+      this.game.scene.scenes[1].enemyName
+    )
     this.enemy.setScale(.4)
 
     // score
@@ -89,7 +93,6 @@ export default class PlayScene extends Scene {
       && this.nugget.y - this.enemy.y >= -this.collisionDist)
     { 
       this.enemySpeed += .1
-      console.log("enemy speed", this.enemySpeed)
     }
     
   }
@@ -100,7 +103,6 @@ export default class PlayScene extends Scene {
 
     if (this.enemy.x <= 8)
     {
-      console.log(Phaser.Math.RND.between(1, 99))
       this.enemyXDirection = 1;
       this.enemyYDirection = this.enemyYDirection * Phaser.Math.RND.between(50, 120)/100
     }
