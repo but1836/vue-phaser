@@ -120,6 +120,5 @@ export default class PlayScene extends Scene {
       this.enemyYDirection = -1;
       this.enemyXDirection = this.enemyXDirection * Phaser.Math.RND.between(50, 120)/100
     }
-
   }
 }
