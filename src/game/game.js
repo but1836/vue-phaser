@@ -4,7 +4,6 @@ import EnemyScene from './scenes/EnemyScene'
 import PlayScene from './scenes/PlayScene'
 import EndScene from './scenes/EndScene'
 
-
 function launch(containerId) {
   return new Phaser.Game({
     type: Phaser.AUTO,

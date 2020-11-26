@@ -51,7 +51,7 @@ export default class BootScene extends Scene {
     this.add.rectangle(303, 299, 400, 400, 0xffffff, .9)
 
     // Game Title
-    this.title = this.add.text(90, 20, 'BRAVO HUNTER', {fontSize: '60px', fill: '#FFF'})
+    this.title = this.add.text(90, 20, 'BRAVO HUNTERRRR', {fontSize: '60px', fill: '#FFF'})
 
     // Instruction text
     this.instructions = this.add.text(120, 550, 'Select your player, then press ENTER', {fontSize: '16px', fill: '#FFF'})
